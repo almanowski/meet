@@ -2,25 +2,12 @@ import axios from 'axios';
 import NProgress from 'nprogress';
 import {mockData} from './mock-data';
 
-export const getAccessToken = async () => {
-  const accessToken = localStorage.getItem('access_token');
-  const tokenCheck = accessToken && (await checkToken(accessToken));
 
-  if (!accessToken || tokenCheck.error) {
-    await localStorage.removeItem('access_token');
-    const searchParams = new URLSearchParams(window.location.search);
-    const code = await searchParams.get('code');
-    if (!code) {
-      const results = await axios.get(
-        'https://6a34rh9gih.execute-api.eu-central-1.amazonaws.com/dev/api/get-auth-url'
-      );
-      const {authUrl} = results.data;
-      return (window.location.href = authUrl);
-    }
-    return code && getToken(code);
-  }
-  return accessToken;
-}
+export const extractLocations = (events) => {
+  var extractLocations = events.map((event) => event.location);
+  var locations = [...new Set(extractLocations)];
+  return locations;
+};
 
 const checkToken = async (accessToken) => {
   const result = await fetch(
@@ -31,12 +18,6 @@ const checkToken = async (accessToken) => {
 
   return result;
 }
-
-export const extractLocations = (events) => {
-  var extractLocations = events.map((event) => event.location);
-  var locations = [...new Set(extractLocations)];
-  return locations;
-};
 
 const removeQuery = () => {
   if (window.history.pushState && window.location.pathname) {
@@ -64,7 +45,6 @@ const getToken = async (code) => {
   return access_token;
 };
 
-
 export const getEvents = async () => {
   NProgress.start();
 
@@ -77,7 +57,7 @@ export const getEvents = async () => {
 
   if (token) {
     removeQuery();
-    const url = 'https://6a34rh9gih.execute-api.eu-central-1.amazonaws.com/dev/api/token/' + token;
+    const url = 'https://6a34rh9gih.execute-api.eu-central-1.amazonaws.com/dev/api/get-events' + token;
     const result = await axios.get(url);
     if (result.data) {
       let locations = extractLocations(result.data.events);
@@ -89,3 +69,31 @@ export const getEvents = async () => {
   }
   
 };
+
+export const getAccessToken = async () => {
+  const accessToken = localStorage.getItem('access_token');
+  const tokenCheck = accessToken && (await checkToken(accessToken));
+
+  if (!accessToken || tokenCheck.error) {
+    await localStorage.removeItem('access_token');
+    const searchParams = new URLSearchParams(window.location.search);
+    const code = await searchParams.get('code');
+    if (!code) {
+      const results = await axios.get(
+        'https://6a34rh9gih.execute-api.eu-central-1.amazonaws.com/dev/api/get-auth-url'
+      );
+      const {authUrl} = results.data;
+      return (window.location.href = authUrl);
+    }
+    return code && getToken(code);
+  }
+  return accessToken;
+}
+
+
+
+
+
+
+
+
