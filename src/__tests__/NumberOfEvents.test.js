@@ -21,14 +21,14 @@ describe('<NumberOfEvents /> component', () => {
 
   // User can change the number of events they want to see
 
-  test('change state when text input changes', () => {
+/*   test('change state when text input changes', () => {
     NumberOfEventshWrapper.setState({
       defaultNumber: '32'
     });
     const eventObject = {target: {value: '15'}};
     NumberOfEventshWrapper.find('.number').simulate('change', eventObject);
     expect(NumberOfEventshWrapper.state('defaultNumber')).toBe('15');
-  });
+  }); */
 
 
 });
