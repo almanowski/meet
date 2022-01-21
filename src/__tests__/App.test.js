@@ -32,6 +32,8 @@ describe('<App />', () => {
 
 // Integration tests
 describe('<App /> integration', () => {
+
+  // EventList
   test('App passes "events" state as a prop to EventList', () => {
     const AppWrapper = mount(<App />);
     const AppEventsState = AppWrapper.state('events');
@@ -40,6 +42,7 @@ describe('<App /> integration', () => {
     AppWrapper.unmount();
   });
 
+  // CitySearch
   test('App passs "locations" state as a prop to CitySearch', () => {
     const AppWrapper = mount(<App />);
     const AppLocationsState = AppWrapper.state('locations');
@@ -69,6 +72,32 @@ describe('<App /> integration', () => {
     await suggestionItems.at(suggestionItems.length - 1).simulate('click');
     const allEvents = await getEvents();
     expect(AppWrapper.state('events')).toEqual(allEvents);
+    AppWrapper.unmount();
+  })
+
+
+  // NumberOfEvents
+  test('App passs "numberofEvents" state as a prop to NumberOfEvents', () => {
+    const AppWrapper = mount(<App />);
+    const AppNumberOfEventsState = AppWrapper.state('eventNumber');
+    expect(AppNumberOfEventsState).not.toEqual(undefined);
+    expect(AppWrapper.find(NumberOfEvents).props().eventNumber).toEqual(32);
+    AppWrapper.unmount();
+  });
+
+  test('get list of events matching the number selected by the user', async () => {
+    const AppWrapper = mount(<App />);
+    const NumberOfEventshWrapper = AppWrapper.find(NumberOfEvents);
+    const selectedNumber = {target: {value: 20}};
+    await NumberOfEventshWrapper.instance().handleInputChanged(selectedNumber);
+    expect(AppWrapper.state('eventNumber')).toBe(20);
+    AppWrapper.unmount();
+  });
+
+  test('Displayed events equal to selected Number', async () => {
+    const AppWrapper = mount(<App />);
+    await AppWrapper.instance().updateNumberOfEvents(1);
+    expect(AppWrapper.state('events').length).toEqual(1);
     AppWrapper.unmount();
   })
 });
