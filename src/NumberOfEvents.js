@@ -7,18 +7,26 @@ class NumberOfEvents extends Component {
 
   handleInputChanged = (event) => {
     const value = event.target.value;
-    
-    this.setState({
-      defaultNumber: value,
-    });
+    if (value <= 0) {
+      this.setState({
+        defaultNumber: '',
+      });
+    } else {
+      this.setState({
+        defaultNumber: value,
+      });
+      this.props.updateNumberOfEvents(value);
+    }
   };
+ 
 
   render() {
     return (
       <div className="number-of-events">
         <p>Number of Events:</p>
-        <input type="text" className="number" value={this.state.defaultNumber} onChange={this.handleInputChanged} />
-
+        <input type="number" className="number" value={this.state.defaultNumber} 
+        onChange={this.handleInputChanged} 
+        />
       </div>
     )
   }
