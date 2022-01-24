@@ -15,20 +15,32 @@ describe('<NumberOfEvents /> component', () => {
   });
 
   test('renders text input correctly', () => {
-    const defaultNumber = NumberOfEventshWrapper.state('defaultNumber');
-    expect(NumberOfEventshWrapper.find('.number').prop('value')).toBe(defaultNumber);
+    const eventNumber = NumberOfEventshWrapper.state('eventNumber');
+    expect(NumberOfEventshWrapper.find('.number').prop('value')).toBe(eventNumber);
   });
 
   // User can change the number of events they want to see
 
-/*   test('change state when text input changes', () => {
+  test('change state when text input changes', () => {
     NumberOfEventshWrapper.setState({
-      defaultNumber: '32'
+      eventNumber: '32'
     });
     const eventObject = {target: {value: '15'}};
     NumberOfEventshWrapper.find('.number').simulate('change', eventObject);
-    expect(NumberOfEventshWrapper.state('defaultNumber')).toBe('15');
-  }); */
+    expect(NumberOfEventshWrapper.state('eventNumber')).toBe('15');
+  });
 
+  test('eventNumber to be empty if value zero or below', () => {
+    const eventObject = {target: {value: '0'}};
+    NumberOfEventshWrapper.find('.number').simulate('change', eventObject);
+    expect(NumberOfEventshWrapper.state('eventNumber')).toBe(0);
+  });
 
+  test('eventNumber to be empty if value above 32', () => {
+    const eventObject = {target: {value: '33'}};
+    NumberOfEventshWrapper.find('.number').simulate('change', eventObject);
+    expect(NumberOfEventshWrapper.state('eventNumber')).toBe(32);
+  });
+
+  
 });
