@@ -100,4 +100,13 @@ describe('<App /> integration', () => {
     expect(AppWrapper.state('events').length).toEqual(1);
     AppWrapper.unmount();
   })
+
+  // Fail - Received: 0 
+  test('eventNumber equals the event length', () => {
+    const AppWrapper = mount(<App />);
+    const EventListWrapper = AppWrapper.find(EventList);
+    AppWrapper.update();
+    expect(EventListWrapper.props().events.length).toEqual(mockData.length);
+    AppWrapper.unmount();
+  });
 });
