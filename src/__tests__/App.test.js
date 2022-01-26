@@ -32,19 +32,30 @@ describe('<App />', () => {
 
 // Integration tests
 describe('<App /> integration', () => {
+  let AppWrapper;
+  beforeEach(() => {
+    AppWrapper = mount(<App />)
+  });
 
   // EventList
   test('App passes "events" state as a prop to EventList', () => {
-    const AppWrapper = mount(<App />);
+    AppWrapper.update();
     const AppEventsState = AppWrapper.state('events');
     expect(AppEventsState).not.toEqual(undefined);
     expect(AppWrapper.find(EventList).props().events).toEqual(AppEventsState);
     AppWrapper.unmount();
   });
 
+  test('App passes the data to EventList', async () => {
+    AppWrapper.update();
+    const EventListWrapper = AppWrapper.find(EventList);
+    expect(EventListWrapper.props().events.length).toEqual(mockData.length);
+    AppWrapper.unmount();
+  });
+
   // CitySearch
   test('App passs "locations" state as a prop to CitySearch', () => {
-    const AppWrapper = mount(<App />);
+    AppWrapper.update();
     const AppLocationsState = AppWrapper.state('locations');
     expect(AppLocationsState).not.toEqual(undefined);
     expect(AppWrapper.find(CitySearch).props().locations).toEqual(AppLocationsState);
@@ -52,7 +63,6 @@ describe('<App /> integration', () => {
   });
 
   test('get list of events matching the city selected by the user', async () => {
-    const AppWrapper = mount(<App />);
     const CitySearchWrapper = AppWrapper.find(CitySearch);
     const locations = extractLocations(mockData);
     CitySearchWrapper.setState({suggestions: locations});
@@ -67,7 +77,6 @@ describe('<App /> integration', () => {
   });
 
   test('get list of all events when user selects "See all cities"', async () => {
-    const AppWrapper = mount(<App />);
     const suggestionItems = AppWrapper.find(CitySearch).find('.suggestions li');
     await suggestionItems.at(suggestionItems.length - 1).simulate('click');
     const allEvents = await getEvents();
@@ -78,7 +87,6 @@ describe('<App /> integration', () => {
 
   // NumberOfEvents
   test('App passs "eventNumber" state as a prop to NumberOfEvents', () => {
-    const AppWrapper = mount(<App />);
     const AppNumberOfEventsState = AppWrapper.state('eventNumber');
     expect(AppNumberOfEventsState).not.toEqual(undefined);
     expect(AppWrapper.find(NumberOfEvents).props().eventNumber).toEqual(32);
@@ -86,7 +94,6 @@ describe('<App /> integration', () => {
   });
 
   test('get list of events matching the number selected by the user', async () => {
-    const AppWrapper = mount(<App />);
     const NumberOfEventshWrapper = AppWrapper.find(NumberOfEvents);
     const selectedNumber = {target: {value: 20}};
     await NumberOfEventshWrapper.instance().handleInputChanged(selectedNumber);
@@ -95,18 +102,26 @@ describe('<App /> integration', () => {
   });
 
   test('Displayed events equal to selected Number', async () => {
-    const AppWrapper = mount(<App />);
     await AppWrapper.instance().updateNumberOfEvents(1);
     expect(AppWrapper.state('events').length).toEqual(1);
     AppWrapper.unmount();
   })
 
-  // Fail - Received: 0 
-  test('eventNumber equals the event length', () => {
-    const AppWrapper = mount(<App />);
-    const EventListWrapper = AppWrapper.find(EventList);
+  test('Event props in EventList equal to selected Number', async () => {
     AppWrapper.update();
-    expect(EventListWrapper.props().events.length).toEqual(mockData.length);
+    AppWrapper.find('.number').simulate('change', { target: { value: '5' } });
+    AppWrapper.update();
+    const AppEventsState = AppWrapper.state('events');
+    expect(AppWrapper.find(EventList).props().events.length).toEqual(AppEventsState.length)
+    AppWrapper.unmount();
+  });
+
+  test('App passes "events" state as a prop to EventLis equal to selected Number', () => {
+    AppWrapper.update();
+    AppWrapper.find('.number').simulate('change', { target: { value: '5' } });
+    AppWrapper.update();
+    const AppEventsState = AppWrapper.state('events');
+    expect(AppWrapper.find(EventList).props().events).toEqual(AppEventsState);
     AppWrapper.unmount();
   });
 });
