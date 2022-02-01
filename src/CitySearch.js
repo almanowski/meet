@@ -5,7 +5,7 @@ class CitySearch extends Component {
   state = {
     query: '',
     suggestions: [],
-    showSuggestions: undefined
+    showSuggestions: undefined,
   }
 
   handleInputChanged = (event) => {
@@ -23,7 +23,7 @@ class CitySearch extends Component {
       return this.setState({
         query: value,
         suggestions,
-        infoText: ''
+        infoText: undefined
       });
     }
   };
@@ -40,7 +40,9 @@ class CitySearch extends Component {
   render() {
     return (
       <div className="CitySearch">
-        <InfoAlert text={this.state.infoText} />
+        <div className="info-alert" style={this.state.infoText ? undefined : {display: 'none'}}>
+          <InfoAlert text={this.state.infoText} />
+        </div>
         <input type="text" className="city" value={this.state.query} 
           onChange={this.handleInputChanged} onFocus={() => {this.setState({showSuggestions: true})}} 
         />

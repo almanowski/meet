@@ -1,16 +1,52 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:500);
+html {
+  background-image: url("../public/webb.png");
+}
+
 .App {
+  padding: 1.5% 5%;
+  background-image: url("../public/webb.png");
   text-align: center;
-  padding: 2% 5%;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 300;
+}
+
+header {
+  background-color: #ffb347;
+  padding: 10px 0;
+  position: relative;
+  display: flex;
+}
+
+.Logo {
+  font-family: 'Permanent Marker', cursive;
+  color: black;
+  font-size: 2em;
+  text-decoration: none;
+  padding-left: 10px;
+}
+
+.Slogan {
+  padding-left: 10px;
+  align-self: center;
+  font-weight: 500;
+  font-size: 1.1em;
 }
 
 .App * {
   box-sizing: border-box;
 }
 
+h2 {
+  margin: 8px 0;
+}
+
 ul {
   padding: 0;
   list-style: none;
+}
+
+a {
+  color: #804A00;
 }
 
 p {
@@ -24,16 +60,28 @@ p {
   display: block;
 }
 
-input[type="text"],
 input[type="number"] {
   padding: 8px 6px 8px 10px;
   border-radius: 4px;
   outline: none;
-  border: 1px solid #ccc;
+  border: 1px solid #ffb347;
   font-size: 14px;
   line-height: 20px;
   align-self: center;
   height: 38px;
+  margin-bottom: 10px;
+}
+
+input[type="text"] {
+  padding: 8px 6px 8px 10px;
+  border-radius: 4px;
+  outline: none;
+  border: 1px solid #ffb347;
+  font-size: 14px;
+  line-height: 20px;
+  align-self: center;
+  height: 38px;
+  margin-top: 20px;
 }
 
 .city {
@@ -55,7 +103,7 @@ input[type="number"] {
   z-index: 2;
   align-self: center;
   margin: 0;
-  top: 43px;
+  top: 56px;
   font-size: 14px;
   box-shadow: 10px 10px 16px -12px rgba(0, 0, 0, 0.75);
 }
@@ -63,7 +111,7 @@ input[type="number"] {
 .suggestions > li {
   text-align: left;
   padding: 8px 6px 8px 10px;
-  background-color: #eee;
+  background-color: #f0f0f1;
   cursor: default;
 }
 
@@ -73,64 +121,60 @@ input[type="number"] {
 }
 
 .suggestions > li:hover {
-  background-color: #bcdcdb;
+  background-color: #ffb347;
+}
+
+.EventList {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
 .event {
-  padding: 10px 10px 35px;
-  margin-bottom: 10px;
+  padding: 5px 10px 35px;
+  margin: 0px 20px 15px;
   text-align: left;
-  border: 1px solid #ccc;
+  border: 1.8px solid #ffb347;
   border-radius: 4px;
   position: relative;
+  background-color: #fff;
+  width: 400px;
 }
 
-.details-btn {
+.number-of-events {
+  color: #804A00;
+  font-weight: 500;
+  font-size: 1em;
+}
+
+.show-details,
+.hide-details {
   position: absolute;
-  right: 5px;
-  bottom: 5px;
-  padding: 5px 8px;
+  right: 10px;
+  bottom: 10px;
+  padding: 10px 18px;
   border-radius: 4px;
-  outline: none;
   cursor: pointer;
-}
-
-.name {
-  font-size: 18px;
-  font-weight: 600;
-}
-
-.group-name {
-  text-transform: uppercase;
-  font-size: 14px;
-}
-
-.going,
-.visibility {
-  font-style: italic;
+  border-style: none;
+  background-color: #ffb347;
+  font-weight: 500;
+  font-size: 1.1em;
 }
 
 .description {
   overflow-x: hidden;
 }
 
-.numberOfEvents {
-  width: 200px;
-  margin: 20px auto;
-  text-align: center;
-}
-
-.button-wrapper {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 20px;
-  padding: 20px;
-  font-family: sans-serif;
-}
-
-.Alert {
+.info-alert {
   position: fixed;
-  top: 20px;
+  align-self: center;
+  top: 77px;
+}
+
+.warning-alert {
+  align-self: center;
+  top: 245px;
+  width: 250px;
+  margin: 0 auto;
 }
 
 .data-vis-wrapper {
@@ -195,7 +239,7 @@ input[type="number"] {
   color: #fff;
   font-size: 14px;
   letter-spacing: 0.2px;
-  font-family: "Roboto";
+  font-family: 'Oswald', sans-serif;
 }
 
 
@@ -209,5 +253,64 @@ input[type="number"] {
     max-width: 50%;
     min-width: auto;
     margin: 0 auto;
+  }
+}
+
+@media all and (max-width: 1400px) {
+  .EventList {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .event {
+    margin: 0 auto 15px;
+    width: 430px;
+  }
+}
+
+@media all and (max-width: 992px) {
+  .EventList {
+    grid-template-columns: 1fr;
+  }
+
+  .event {
+    width: 500px;
+    margin: 0 auto 20px;
+  }
+}
+
+@media all and (max-width: 576px) {
+  .EventList {
+    grid-template-columns: 1fr;
+  }
+
+  .event {
+    width: 330px;
+    margin: 0 auto 20px;
+  }
+
+  .Slogan {
+    font-weight: 500;
+    font-size: 1em;
+  }
+
+  .hide-details {
+    bottom: 5px;
+    padding: 7px 15px;
+  }
+}
+
+
+@media all and (max-width: 280px) {
+  .EventList {
+    grid-template-columns: 1fr;
+  }
+
+  .event {
+    width: 260px;
+    margin: 0 auto 20px;
+  }
+
+  .Slogan {
+    color: #ffb347;
   }
 }

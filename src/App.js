@@ -54,10 +54,16 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
-        <NumberOfEvents eventNumber={this.state.eventNumber} updateNumberOfEvents={this.updateNumberOfEvents}/>
-        <EventList events={this.state.events} />
+      <div>
+        <header>
+          <p className="Logo">LEME</p>
+          <p className="Slogan">- Learn new skills & meet new people</p>
+        </header>
+        <div className="App">
+          <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
+          <NumberOfEvents eventNumber={this.state.eventNumber} updateNumberOfEvents={this.updateNumberOfEvents}/>
+          <EventList events={this.state.events} />
+        </div>
       </div>
     );
   }

@@ -25,7 +25,7 @@ class NumberOfEvents extends Component {
     } else {
       this.setState({
         eventNumber: value,
-        errorText: ''
+        errorText: undefined
       });
     }
     if (this.props.updateNumberOfEvents)
@@ -36,11 +36,13 @@ class NumberOfEvents extends Component {
   render() {
     return (
       <div className="number-of-events">
-        <ErrorAlert text={this.state.errorText} />
-        <p>Number of Events:</p>
+        <p className="number-of-events">Number of Events:</p>
         <input type="number" className="number" value={this.state.eventNumber} 
         onChange={this.handleInputChanged} 
         />
+        <div className="warning-alert" style={this.state.errorText ? undefined : {display: 'none'}}>
+          <ErrorAlert text={this.state.errorText} />
+        </div>
       </div>
     )
   }

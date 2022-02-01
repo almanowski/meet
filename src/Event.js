@@ -27,7 +27,7 @@ class Event extends Component {
         
         {!collapsed && 
           <div className="event-details">
-            <p>About event:</p>
+            <p><b>About event:</b></p>
             <a className="link" href={event.htmlLink} target="_blank" rel="noreferrer">See details on Google Calender</a>
             <p className="description">{event.description}</p>
             <button className="hide-details" onClick={() => this.handleItemClicked()}>X</button>
