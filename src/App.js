@@ -43,7 +43,7 @@ class App extends Component {
 
     if (!navigator.onLine) {
       this.setState ({
-        infoText: 'You are offline.'
+        online: 'false'
       })
     }
   }
@@ -83,15 +83,17 @@ class App extends Component {
           <p className="Logo">LEME</p>
           <p className="Slogan">- Learn new skills & meet new people</p>
         </header>
+        {!this.state.online && (
         <div className="info-alert" style={this.state.infoText ? undefined : {display: 'none'}}>
           <InfoAlert text={this.state.infoText} />
         </div>
+        )}
         <div className="App">
           <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
           <NumberOfEvents eventNumber={this.state.eventNumber} updateNumberOfEvents={this.updateNumberOfEvents}/>
           <EventList events={this.state.events} />
         </div>
-        <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => {getAccessToken()}} />
+        {navigator.online && <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => {getAccessToken()}} />}
       </div>
     );
   }
