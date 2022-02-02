@@ -34,18 +34,6 @@ class App extends Component {
         }
       });
     }
-
-/*     getEvents().then((events) => {
-      if (this.mounted) {
-        this.setState({events: events.slice(0, this.state.eventNumber), locations: extractLocations(events)});
-      }
-    }); */
-
-    if (!navigator.onLine) {
-      this.setState ({
-        online: 'false'
-      })
-    }
   }
 
   componentWillUnmount(){
@@ -83,7 +71,7 @@ class App extends Component {
           <p className="Logo">LEME</p>
           <p className="Slogan">- Learn new skills & meet new people</p>
         </header>
-        {!this.state.online && (
+        {!navigator.online && (
         <div className="info-alert" style={this.state.infoText ? undefined : {display: 'none'}}>
           <InfoAlert text={this.state.infoText} />
         </div>
@@ -92,8 +80,8 @@ class App extends Component {
           <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
           <NumberOfEvents eventNumber={this.state.eventNumber} updateNumberOfEvents={this.updateNumberOfEvents}/>
           <EventList events={this.state.events} />
+          <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => {getAccessToken()}} />
         </div>
-        {navigator.online && <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => {getAccessToken()}} />}
       </div>
     );
   }
