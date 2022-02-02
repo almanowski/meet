@@ -30,17 +30,16 @@ class App extends Component {
     if ((code || isTokenValid) && this.mounted) {
       getEvents().then((events) => {
         if (this.mounted) {
-          this.setState({events, locations: extractLocations(events) });
+          this.setState({events: events.slice(0, this.state.eventNumber), locations: extractLocations(events) });
         }
       });
     }
 
-
-    getEvents().then((events) => {
+/*     getEvents().then((events) => {
       if (this.mounted) {
         this.setState({events: events.slice(0, this.state.eventNumber), locations: extractLocations(events)});
       }
-    });
+    }); */
 
     if (!navigator.onLine) {
       this.setState ({
