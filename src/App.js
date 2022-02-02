@@ -3,7 +3,8 @@ import './App.css';
 import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
-import {extractLocations, getEvents} from './api';
+import {extractLocations, getEvents, checkToken, getAccessToken} from './api';
+import WelcomeScreen from './WelcomeScreen';
 import {InfoAlert} from './Alert';
 
 import './nprogress.css';
@@ -14,11 +15,27 @@ class App extends Component {
     events: [],
     locations: [],
     eventNumber: 32,
-    currentLocation: 'all'
+    currentLocation: 'all',
+    showWelcomeScreen: undefined
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.mounted = true;
+    const accessToken = localStorage.getItem('access_token');
+    const isTokenValid = (await checkToken(accessToken)).error ? false : true;
+    const searchParams = new URLSearchParams(window.location.search);
+    const code = searchParams.get('code');
+
+    this.setState({showWelcomeScreen: !(code || isTokenValid) });
+    if ((code || isTokenValid) && this.mounted) {
+      getEvents().then((events) => {
+        if (this.mounted) {
+          this.setState({events, locations: extractLocations(events) });
+        }
+      });
+    }
+
+
     getEvents().then((events) => {
       if (this.mounted) {
         this.setState({events: events.slice(0, this.state.eventNumber), locations: extractLocations(events)});
@@ -60,6 +77,7 @@ class App extends Component {
   }
 
   render() {
+    if (this.state.showWelcomeScreen === undefined) return <div className='App' />
     return (
       <div>
         <header>
@@ -73,6 +91,7 @@ class App extends Component {
           <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
           <NumberOfEvents eventNumber={this.state.eventNumber} updateNumberOfEvents={this.updateNumberOfEvents}/>
           <EventList events={this.state.events} />
+          <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => {getAccessToken()}} />
         </div>
       </div>
     );
