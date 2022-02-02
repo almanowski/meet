@@ -34,6 +34,15 @@ class App extends Component {
         }
       });
     }
+    if (!navigator.onLine) {
+      this.setState ({
+        infoText: 'You are offline.'
+      })
+    } else {
+      this.setState ({
+        infoText: undefined
+      })
+    }
   }
 
   componentWillUnmount(){
@@ -54,15 +63,6 @@ class App extends Component {
         });
       }
     });
-    if (!navigator.onLine) {
-      this.setState ({
-        infoText: 'You are offline.'
-      })
-    } else {
-      this.setState ({
-        infoText: undefined
-      })
-    }
   }
 
   updateNumberOfEvents = (eventCount) => {
