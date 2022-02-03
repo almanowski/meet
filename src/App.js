@@ -5,7 +5,7 @@ import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import {extractLocations, getEvents, checkToken, getAccessToken} from './api';
 import WelcomeScreen from './WelcomeScreen';
-import {InfoAlert} from './Alert';
+import {ErrorAlert} from './Alert';
 
 import './nprogress.css';
 
@@ -71,7 +71,7 @@ class App extends Component {
           <p className="Logo">LEME</p>
           <p className="Slogan">- Learn new skills & meet new people</p>
         </header>
-        {!navigator.onLine && <InfoAlert className="info-alert" text='You are offline' />}
+        {!navigator.onLine && <ErrorAlert className="offline-alert" text='You are offline' />}
         <div className="App">
           <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
           <NumberOfEvents eventNumber={this.state.eventNumber} updateNumberOfEvents={this.updateNumberOfEvents}/>

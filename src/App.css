@@ -177,6 +177,14 @@ input[type="text"] {
   margin: 0 auto;
 }
 
+.offline-alert {
+  position: fixed;
+  align-self: center;
+  top: 77px;
+  width: 250px;
+  margin: 0 auto;
+}
+
 .data-vis-wrapper {
   display: flex;
   align-items: center;
