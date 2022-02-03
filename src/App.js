@@ -71,6 +71,9 @@ class App extends Component {
       </div>
       )
     }
+
+    if (this.state.showWelcomeScreen === undefined) return <div className="App" />
+    
     return (
       <div>
         <header>
@@ -82,7 +85,7 @@ class App extends Component {
           <NumberOfEvents eventNumber={this.state.eventNumber} updateNumberOfEvents={this.updateNumberOfEvents}/>
           <EventList events={this.state.events} />
         </div>
-        {navigator.onLine && <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />}
+        <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />
       </div>
     );
   }
