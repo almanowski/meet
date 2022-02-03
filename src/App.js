@@ -67,14 +67,14 @@ class App extends Component {
     if (!navigator.onLine) {
       return(
       <div>
-        <div className="offline-alert">
-          <ErrorAlert text='You are offline' />
-        </div>
         <header>
           <p className="Logo">LEME</p>
           <p className="Slogan">- Learn new skills & meet new people</p>
         </header>
         <div className="App">
+          <div className="offline-alert">
+            <ErrorAlert text='You are offline' />
+          </div>
           <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
           <NumberOfEvents eventNumber={this.state.eventNumber} updateNumberOfEvents={this.updateNumberOfEvents}/>
           <EventList events={this.state.events} />
