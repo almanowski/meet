@@ -34,15 +34,6 @@ class App extends Component {
         }
       });
     }
-    if (!navigator.onLine) {
-      this.setState ({
-        infoText: 'You are offline.'
-      })
-    } else {
-      this.setState ({
-        infoText: undefined
-      })
-    }
   }
 
   componentWillUnmount(){
@@ -80,9 +71,7 @@ class App extends Component {
           <p className="Logo">LEME</p>
           <p className="Slogan">- Learn new skills & meet new people</p>
         </header>
-        <div className="info-alert" style={this.state.infoText ? undefined : {display: 'none'}}>
-          <InfoAlert text={this.state.infoText} />
-        </div>
+        {navigator.onLine && <InfoAlert className="info-alert" text='You are offline' />}
         <div className="App">
           <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
           <NumberOfEvents eventNumber={this.state.eventNumber} updateNumberOfEvents={this.updateNumberOfEvents}/>
