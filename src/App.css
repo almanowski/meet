@@ -178,10 +178,9 @@ input[type="text"] {
 }
 
 .offline-alert {
-  position: fixed;
-  align-self: center;
+  text-align: center;
   top: 77px;
-  width: 250px;
+  width: 100px;
   margin: 0 auto;
 }
 
