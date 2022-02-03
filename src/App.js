@@ -71,7 +71,7 @@ class App extends Component {
           <p className="Logo">LEME</p>
           <p className="Slogan">- Learn new skills & meet new people</p>
         </header>
-        {navigator.onLine && <InfoAlert className="info-alert" text='You are offline' />}
+        {!navigator.onLine && <InfoAlert className="info-alert" text='You are offline' />}
         <div className="App">
           <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
           <NumberOfEvents eventNumber={this.state.eventNumber} updateNumberOfEvents={this.updateNumberOfEvents}/>
