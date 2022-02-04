@@ -30,7 +30,7 @@ class App extends Component {
     if ((code || isTokenValid) && this.mounted) {
       getEvents().then((events) => {
         if (this.mounted) {
-          this.setState({events: events.slice(0, this.state.eventNumber), locations: extractLocations(events) });
+          this.setState({events, locations: extractLocations(events) });
         }
       });
     }
@@ -69,7 +69,7 @@ class App extends Component {
       <div>
         <header>
           <p className="Logo">LEME</p>
-          <p className="Slogan">- Learn new skills & meet new people</p>
+          <p className="Slogan">Learn new skills & meet new people</p>
         </header>
         <div className="App">
           <div className="offline-alert">
