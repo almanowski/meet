@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {InfoAlert} from './Alert';
-import {ErrorAlert} from './Alert';
 
 class CitySearch extends Component {
   state = {
@@ -41,11 +40,6 @@ class CitySearch extends Component {
   render() {
     return (
       <div className="CitySearch">
-        {!navigator.onLine &&
-            <div className="offline-alert">
-              <ErrorAlert text='You are offline' />
-            </div>
-          }
         <div className="info-alert" style={this.state.infoText ? undefined : {display: 'none'}}>
           <InfoAlert text={this.state.infoText} />
         </div>
