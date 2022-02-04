@@ -180,9 +180,11 @@ input[type="text"] {
 
 .offline-alert {
   position: fixed;
+  align-self: center;
   text-align: center;
   width: 110px;
-  margin: 0 auto;
+  left: 50%;
+  transform: translateX(-50%);
   top: 77px;
 }
 
