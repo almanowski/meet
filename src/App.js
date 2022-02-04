@@ -5,7 +5,7 @@ import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import {extractLocations, getEvents, checkToken, getAccessToken} from './api';
 import WelcomeScreen from './WelcomeScreen';
-import {ErrorAlert} from './Alert';
+
 
 import './nprogress.css';
 
@@ -64,7 +64,6 @@ class App extends Component {
   }
 
   render() {
-
     if (this.state.showWelcomeScreen === undefined) {
       return <div className="App" />;
     }
@@ -74,11 +73,6 @@ class App extends Component {
           <p className="Logo">LEME</p>
           <p className="Slogan">Learn new skills & meet new people</p>
         </header>
-          {!navigator.onLine &&
-            <div className="offline-alert">
-              <ErrorAlert text='You are offline' />
-            </div>
-          }
           <div className="App">
           <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
           <NumberOfEvents eventNumber={this.state.eventNumber} updateNumberOfEvents={this.updateNumberOfEvents}/>
