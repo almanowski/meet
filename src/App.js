@@ -30,7 +30,7 @@ class App extends Component {
     if ((code || isTokenValid) && this.mounted) {
       getEvents().then((events) => {
         if (this.mounted) {
-          this.setState({events, locations: extractLocations(events) });
+          this.setState({events: events.slice(0, this.state.eventNumber), locations: extractLocations(events) });
         }
       });
     }
@@ -68,16 +68,13 @@ class App extends Component {
     if (this.state.showWelcomeScreen === undefined) {
       return <div className="App" />;
     }
-
-    if (this.state.showWelcomeScreen === false) {
-      console.log('WelcomeScreen false')
       return (
       <div>
         <header>
           <p className="Logo">LEME</p>
           <p className="Slogan">Learn new skills & meet new people</p>
         </header>
-          { !navigator.onLine &&
+          {!navigator.onLine &&
             <div className="offline-alert">
               <ErrorAlert text='You are offline' />
             </div>
@@ -86,17 +83,10 @@ class App extends Component {
           <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
           <NumberOfEvents eventNumber={this.state.eventNumber} updateNumberOfEvents={this.updateNumberOfEvents}/>
           <EventList events={this.state.events} />
+          <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />
         </div>
       </div>
       )
-    }
-    if (this.state.showWelcomeScreen === true) {
-      return (
-        <div>
-          <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />
-        </div>
-      );
-    }
   }
 }
 
