@@ -34,13 +34,6 @@ class App extends Component {
         }
       });
     }
-    if (!navigator.onLine) {
-      getEvents().then((events) => {
-        if (this.mounted) {
-          this.setState({events, locations: extractLocations(events) });
-        }
-      });
-    }
   }
 
   componentWillUnmount(){
@@ -71,17 +64,25 @@ class App extends Component {
   }
 
   render() {
-    if (!navigator.onLine) {
-      return(
+
+    if (this.state.showWelcomeScreen === undefined) {
+      return <div className="App" />;
+    }
+
+    if (this.state.showWelcomeScreen === false) {
+      console.log('WelcomeScreen false')
+      return (
       <div>
         <header>
           <p className="Logo">LEME</p>
           <p className="Slogan">Learn new skills & meet new people</p>
         </header>
-        <div className="App">
-          <div className="offline-alert">
-            <ErrorAlert text='You are offline' />
-          </div>
+          { !navigator.onLine &&
+            <div className="offline-alert">
+              <ErrorAlert text='You are offline' />
+            </div>
+          }
+          <div className="App">
           <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
           <NumberOfEvents eventNumber={this.state.eventNumber} updateNumberOfEvents={this.updateNumberOfEvents}/>
           <EventList events={this.state.events} />
@@ -89,20 +90,13 @@ class App extends Component {
       </div>
       )
     }
-    return (
-      <div>
-        <header>
-          <p className="Logo">LEME</p>
-          <p className="Slogan">Learn new skills & meet new people</p>
-        </header>
-        <div className="App">
-          <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
-          <NumberOfEvents eventNumber={this.state.eventNumber} updateNumberOfEvents={this.updateNumberOfEvents}/>
-          <EventList events={this.state.events} />
+    if (this.state.showWelcomeScreen === true) {
+      return (
+        <div>
+          <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />
         </div>
-        <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />
-      </div>
-    );
+      );
+    }
   }
 }
 
