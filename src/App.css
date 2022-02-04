@@ -179,10 +179,11 @@ input[type="text"] {
 }
 
 .offline-alert {
-  position: relative;
+  position: fixed;
   text-align: center;
   width: 110px;
   margin: 0 auto;
+  top: 77px;
 }
 
 .data-vis-wrapper {
