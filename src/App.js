@@ -21,6 +21,7 @@ class App extends Component {
 
   async componentDidMount() {
     this.mounted = true;
+    if (navigator.onLine) {
     const accessToken = localStorage.getItem('access_token');
     const isTokenValid = (await checkToken(accessToken)).error ? false : true;
     const searchParams = new URLSearchParams(window.location.search);
@@ -33,6 +34,15 @@ class App extends Component {
           this.setState({events: events.slice(0, this.state.eventNumber), locations: extractLocations(events) });
         }
       });
+      console.log('online')
+    }
+    } else if (!navigator.onLine) {
+      getEvents().then((events) => {
+        if (this.mounted) {
+          this.setState({events: events.slice(0, this.state.eventNumber), locations: extractLocations(events) });
+        }
+      });
+      console.log('offline')
     }
   }
 
