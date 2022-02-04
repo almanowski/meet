@@ -75,7 +75,7 @@ class App extends Component {
       return (
       <div>
         <header>
-          <p className="Logo">LEME</p>
+          <p className="Logo">MEET</p>
           <p className="Slogan">Learn new skills & meet new people</p>
         </header>
           <div className="App">
