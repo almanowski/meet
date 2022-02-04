@@ -5,7 +5,7 @@ function WelcomeScreen(props) {
   return props.showWelcomeScreen ? ( 
     <div className="WelcomeScreen">
       <img src={process.env.PUBLIC_URL + "/leme-app-192.png"} alt="Logo" className="logo"></img>
-      <h1>Welcome to the <span className="leme">LEME</span> app</h1> 
+      <h1>Welcome to the <span className="leme">MEET</span> app</h1> 
       <h4> 
       Where you can learn new skills and meet new people
       </h4> 
