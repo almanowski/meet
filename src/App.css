@@ -8,6 +8,7 @@ html {
   text-align: center;
   font-family: 'Oswald', sans-serif;
   font-weight: 300;
+  color: #3d2400;
 }
 
 header {
@@ -19,7 +20,7 @@ header {
 
 .Logo {
   font-family: 'Permanent Marker', cursive;
-  color: black;
+  color: #3d2400;
   font-size: 2em;
   text-decoration: none;
   padding-left: 10px;
@@ -52,6 +53,7 @@ a {
 
 p {
   margin: 5px 0;
+  color: #3d2400;
 }
 
 .display-none {

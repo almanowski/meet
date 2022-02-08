@@ -24,7 +24,7 @@ const EventGenre = ({events}) => {
   return (
     <ResponsiveContainer height={400}>
       <PieChart width={400} height={400} className="pie-chart">
-        <Pie data={data} cy={200} innerRadius={75} outerRadius={105} fill="#fff" paddingAngle={3}
+        <Pie data={data} cy={200} innerRadius={60} outerRadius={90} fill="#fff" paddingAngle={3}
           dataKey="value" label={({name, percent}) => `${name} ${(percent * 100).toFixed(0)}%`}
         >
           {data.map((entry, index) => (
