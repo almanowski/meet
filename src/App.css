@@ -47,7 +47,7 @@ ul {
 }
 
 a {
-  color: #804A00;
+  color: #804a00;
 }
 
 p {
@@ -193,10 +193,7 @@ input[type="text"] {
   align-items: center;
   flex-direction: column;
 }
-.data-vis-wrapper .recharts-responsive-container {
-  min-width: 100%;
-  display: flex;
-}
+
 .recharts-surface {
   overflow: visible;
 }
@@ -205,12 +202,6 @@ input[type="text"] {
 @media only screen and (min-width: 992px) {
   .data-vis-wrapper {
     flex-direction: row;
-  }
-  .data-vis-wrapper .recharts-responsive-container {
-    flex-basis: 50%;
-    max-width: 50%;
-    min-width: auto;
-    margin: 0 auto;
   }
 }
 
