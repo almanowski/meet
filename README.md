@@ -1,6 +1,9 @@
 # Meet App
+![Badge](https://img.shields.io/badge/demo-online-green)
 
 Creating the 'Meet App' is part of my [CF Full-Stack Web Development Programm](https://careerfoundry.com/en/courses/become-a-web-developer/).
+
+Live Demo [here](https://almanowski.github.io/meet/).
 
 <p>&nbsp;</p>
 
@@ -31,3 +34,6 @@ To build a serverless, progressive web application (PWA) with React using test-d
 
 ## 💻 Technologies Used
 * React ^17.0.2
+* AWS Lamada
+* Google Calendar API 
+* Recharts ^2.1.8
