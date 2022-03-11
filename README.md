@@ -1,6 +1,14 @@
 # Meet App
 ![Badge](https://img.shields.io/badge/demo-online-green)
 
+<p>&nbsp;</p>
+
+<p align="center">
+    <img src="./public/meet.png" alt="App mockup image" />
+</p>
+
+<p>&nbsp;</p>
+
 Creating the 'Meet App' is part of my [CF Full-Stack Web Development Programm](https://careerfoundry.com/en/courses/become-a-web-developer/).
 
 Live Demo [here](https://almanowski.github.io/meet/).
