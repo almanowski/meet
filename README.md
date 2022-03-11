@@ -4,7 +4,7 @@
 <p>&nbsp;</p>
 
 <p align="center">
-    <img src="./public/meet.png" alt="App mockup image" />
+    <img src="./public/meetapp.png" alt="App mockup image" />
 </p>
 
 <p>&nbsp;</p>
