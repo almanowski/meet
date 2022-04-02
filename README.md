@@ -3,12 +3,6 @@
 
 <p>&nbsp;</p>
 
-<p align="center">
-    <img src="./public/meetapp.png" alt="App mockup image" />
-</p>
-
-<p>&nbsp;</p>
-
 Creating the 'Meet App' is part of my [CF Full-Stack Web Development Programm](https://careerfoundry.com/en/courses/become-a-web-developer/).
 
 Live Demo [here](https://almanowski.github.io/meet/).
